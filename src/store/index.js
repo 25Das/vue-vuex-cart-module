@@ -47,6 +47,22 @@ export default createStore({
         .filter((product) => product.quantity > 0);
     },
   },
-  actions: {},
-  getters: {},
+  getters: {
+    total(state) {
+      return state.cart.reduce(
+        (total, product) => (total += product.price * product.quantity),
+        0,
+      );
+    },
+  },
+  actions: {
+    storeUser({ commit }, data) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          commit('storeUser', data);
+          resolve();
+        }, 3000);
+      });
+    },
+  },
 });

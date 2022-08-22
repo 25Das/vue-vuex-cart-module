@@ -1,6 +1,13 @@
 <template>
   <div class="flex flex-col items-center">
-    <div v-if="$store.state.products.length > 0" class="mb-5 flex flex-col">
+    <div>
+      <span>
+        <strong>Total do carrinho:</strong> R$
+        {{ $store.getters.total }}
+      </span>
+    </div>
+
+    <div v-if="$store.state.products.length > 0" class="mt-2 flex flex-col">
       <span
         class="mx-auto mb-2 w-fit rounded bg-purple-500 px-2 font-medium text-white"
         >Produtos</span
@@ -8,7 +15,7 @@
       <AppProducts />
     </div>
 
-    <div v-if="$store.state.cart.length > 0" class="mb-5 flex flex-col">
+    <div v-if="$store.state.cart.length > 0" class="mt-2 flex flex-col">
       <span
         class="mx-auto mb-2 w-fit rounded bg-purple-500 px-2 font-medium text-white"
         >Carrinho</span
@@ -29,11 +36,17 @@
       </div>
     </div>
 
-    <div>
-      <span>
-        <strong>Total do carrinho:</strong> R$
-        {{ total }}
-      </span>
+    <div class="flex flex-col items-center justify-center">
+      <span
+        >{{ $store.state.user.firstName }}
+        {{ $store.state.user.lastName }}</span
+      >
+      <button
+        class="rounded bg-gray-500 px-2 text-sm text-white"
+        @click="updateUser()"
+      >
+        Atualizar Perfil
+      </button>
     </div>
   </div>
 </template>
@@ -45,11 +58,15 @@
     components: {
       AppProducts,
     },
-    computed: {
-      total() {
-        return this.$store.state.cart.reduce((total, product) => {
-          return total + product.price * product.quantity;
-        }, 0);
+    methods: {
+      updateUser() {
+        const newUser = {
+          firstName: 'Jane',
+          lastName: 'Doe',
+          email: 'jane@doe.com',
+        };
+
+        this.$store.dispatch('storeUser', newUser);
       },
     },
   };

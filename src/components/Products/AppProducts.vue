@@ -3,7 +3,7 @@
     <AppProduct
       v-for="product in $store.state.products"
       :key="product.id"
-      class="mb-2 bg-orange-200 p-2"
+      class="mb-2 bg-green-200 p-2"
       :product="product"
     />
   </div>
