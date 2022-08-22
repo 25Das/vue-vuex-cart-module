@@ -37,10 +37,6 @@ export default createStore({
       state.cart.push(data);
     },
     removeProduct(state, removedProduct) {
-      console.log(
-        '🚀 ~ file: index.js ~ line 40 ~ removeProduct ~ removedProduct',
-        removedProduct,
-      );
       state.cart = state.cart
         .map((product) => {
           if (product.id === removedProduct.id) {
